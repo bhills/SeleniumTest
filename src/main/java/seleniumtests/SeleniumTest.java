@@ -1,8 +1,7 @@
 package seleniumtests;
 import POM.HomePage;
 import POM.LoginPage;
-import cucumber.api.java.hu.De;
-import cucumber.api.java.sl.In;
+import POM.SignUpPage;
 import driverclass.DriverClass;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -10,10 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 
-import java.awt.*;
 
 public class SeleniumTest {
 
@@ -60,9 +56,38 @@ public class SeleniumTest {
 
 
 
+    @DisplayName("Test: 2 Register to Podium")
+    @Test
+    public void RegisterTest()
+    {
+        HomePage homePage = new HomePage(driver);
+        homePage.waitForPageToLoad(wait);
+        driver.navigate().to("https://signup.podium.com/");
+        SignUpPage signUpPage = new SignUpPage(driver);
+        wait.until(ExpectedConditions.presenceOfElementLocated(signUpPage.getFirstName()));
+        signUpPage.fillInFirstName();
+        signUpPage.fillInLastName();
+        signUpPage.fillInMobile();
+        signUpPage.fillInBusinessName();
+        signUpPage.fillInWorkEmail();
+        signUpPage.fillInPassword();
+        signUpPage.clickCreateAccount();
+        boolean clickCreateAccountButton = driver.findElement(signUpPage.getCreateAccount()).isDisplayed();
+        assert (clickCreateAccountButton);
+
+    }
+
+    @DisplayName("Test: 3 Send a message")
+    @Test
+
+
+
+
+
     @AfterEach
     public void closeDriver()
     {
-        driver.quit();
+        driver.close();
     }
 }
+

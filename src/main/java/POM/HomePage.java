@@ -19,6 +19,9 @@ public class HomePage {
     }
 
     By InboxMessenger = By.id("navigate-to-messenger");
+    By NewMessage = By.id("selenium-send-review-invite-button");
+    By NameInput = By.id("firstInput");
+    
 
     public By getInboxMessenger() {
         return InboxMessenger;
